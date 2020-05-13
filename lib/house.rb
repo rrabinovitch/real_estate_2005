@@ -47,11 +47,13 @@ class House
     rooms_by_area = (@rooms.sort_by { |room| room.area}).reverse
   end
 
-  # def rooms_sorted_by_category
-  #   rooms_by_area = {}
-  #
-  #   @rooms.map do |room|
-  #     rooms_by_area[room.category] = rooms_from_category(room.category)
-  #   end
-  # end
+  def rooms_by_category
+    rooms_by_category = {}
+
+    @rooms.map do |room|
+      rooms_by_category[room.category] = rooms_from_category(room.category)
+    end
+
+    rooms_by_category
+  end
 end
