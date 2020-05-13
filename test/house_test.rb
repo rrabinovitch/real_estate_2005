@@ -39,8 +39,14 @@ class HouseTest < Minitest::Test
   end
 
   def test_it_can_identify_if_above_market_average
-    house = House.new("$400000", "123 sugar lane")
-    assert_equal false, house.above_market_average?
+    house_1 = House.new("$400000", "123 sugar lane")
+    house_2 = House.new("$500000", "456 pepper street")
+    house_3 = House.new("$500001", "789 salt avenue")
+
+    assert_equal false, house_1.above_market_average?
+    assert_equal false, house_2.above_market_average?
+    assert_equal true, house_3.above_market_average?
+
   end
 
   def test_it_can_identify_rooms_of_each_category
@@ -75,5 +81,23 @@ class HouseTest < Minitest::Test
     house.add_room(room_4)
 
     assert_equal 1900, house.area
+  end
+
+  def test_it_can_list_house_details
+    house = House.new("$400000", "123 sugar lane")
+
+    room_1 = Room.new(:bedroom, 10, '13')
+    room_2 = Room.new(:bedroom, 11, '15')
+    room_3 = Room.new(:living_room, 25, '15')
+    room_4 = Room.new(:basement, 30, '41')
+
+    house.add_room(room_1)
+    house.add_room(room_2)
+    house.add_room(room_3)
+    house.add_room(room_4)
+
+    house_details = {"price" => 400000, "address" => "123 sugar lane"}
+
+    assert_equal house_details, house.details
   end
 end
